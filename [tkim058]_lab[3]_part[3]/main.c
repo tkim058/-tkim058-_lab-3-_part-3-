@@ -39,7 +39,19 @@ void Tick() {
 		{
 			state = PA2_prsd;
 		}
-		else
+		else if((GetBit(A,1)) && (GetBit(A,2)) && (GetBit(A,3)))
+		{
+			state = Locked;
+		}
+		else if ((GetBit(A,1)) && (GetBit(A,2)))
+		{
+			state = Locked;
+		}
+		else if ((GetBit(A,1)) &&  (GetBit(A,3)))
+		{
+			state = Locked;
+		}
+		else 
 		{
 			state = Locked;
 		}
@@ -50,7 +62,8 @@ void Tick() {
 		{
 			state = PA2_prsd;
 		}
-		else
+		
+		else 
 		{
 			state = PA2_rlsd;
 		}
@@ -61,7 +74,19 @@ void Tick() {
 		{
 			state = Unlocked;
 		}
-		else
+		else if ((GetBit(A,1)) && (GetBit(A,2)) && (GetBit(A,3)))
+		{
+			state = Locked;
+		}
+		else if ((GetBit(A,1)) && (GetBit(A,2)))
+		{
+			state = Locked;
+		}
+		else if ((GetBit(A,1)) &&  (GetBit(A,3)))
+		{
+			state = Locked;
+		}
+		else 
 		{
 			state = PA2_rlsd;
 		}
