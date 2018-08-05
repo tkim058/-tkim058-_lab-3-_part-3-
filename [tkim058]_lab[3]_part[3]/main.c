@@ -97,6 +97,7 @@ void Tick() {
 		{
 			state = Locked;
 		}
+
 		else
 		{
 			state = Unlocked;

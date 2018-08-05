@@ -3,31 +3,31 @@
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000478  2**0
+  0 .data         00000000  00800100  00800100  0000053a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000404  00000000  00000000  00000074  2**1
+  1 .text         000004c6  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000004  00800100  00800100  00000478  2**0
+  2 .bss          00000004  00800100  00800100  0000053a  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000478  2**0
+  3 .comment      00000030  00000000  00000000  0000053a  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000004a8  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000056c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000038  00000000  00000000  000004e8  2**0
+  5 .debug_aranges 00000038  00000000  00000000  000005ac  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000916  00000000  00000000  00000520  2**0
+  6 .debug_info   00000922  00000000  00000000  000005e4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000007f7  00000000  00000000  00000e36  2**0
+  7 .debug_abbrev 000007f7  00000000  00000000  00000f06  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000467  00000000  00000000  0000162d  2**0
+  8 .debug_line   000004f5  00000000  00000000  000016fd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000094  00000000  00000000  00001a94  2**2
+  9 .debug_frame  00000094  00000000  00000000  00001bf4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000044b  00000000  00000000  00001b28  2**0
+ 10 .debug_str    0000045f  00000000  00000000  00001c88  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000106  00000000  00000000  00001f73  2**0
+ 11 .debug_loc    00000106  00000000  00000000  000020e7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000028  00000000  00000000  00002079  2**0
+ 12 .debug_ranges 00000028  00000000  00000000  000021ed  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -125,8 +125,8 @@ Disassembly of section .text:
   a2:	a4 30       	cpi	r26, 0x04	; 4
   a4:	b2 07       	cpc	r27, r18
   a6:	e1 f7       	brne	.-8      	; 0xa0 <.do_clear_bss_loop>
-  a8:	76 d1       	rcall	.+748    	; 0x396 <main>
-  aa:	aa c1       	rjmp	.+852    	; 0x400 <_exit>
+  a8:	d7 d1       	rcall	.+942    	; 0x458 <main>
+  aa:	0b c2       	rjmp	.+1046   	; 0x4c2 <_exit>
 
 000000ac <__bad_interrupt>:
   ac:	a9 cf       	rjmp	.-174    	; 0x0 <__vectors>
@@ -239,466 +239,600 @@ void Tick() {
  14e:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <state>
  152:	88 2f       	mov	r24, r24
  154:	90 e0       	ldi	r25, 0x00	; 0
- 156:	81 30       	cpi	r24, 0x01	; 1
+ 156:	82 30       	cpi	r24, 0x02	; 2
  158:	91 05       	cpc	r25, r1
  15a:	09 f4       	brne	.+2      	; 0x15e <Tick+0x18>
- 15c:	4f c0       	rjmp	.+158    	; 0x1fc <Tick+0xb6>
- 15e:	82 30       	cpi	r24, 0x02	; 2
+ 15c:	63 c0       	rjmp	.+198    	; 0x224 <Tick+0xde>
+ 15e:	83 30       	cpi	r24, 0x03	; 3
  160:	91 05       	cpc	r25, r1
- 162:	1c f4       	brge	.+6      	; 0x16a <Tick+0x24>
- 164:	89 2b       	or	r24, r25
- 166:	49 f0       	breq	.+18     	; 0x17a <Tick+0x34>
+ 162:	34 f4       	brge	.+12     	; 0x170 <Tick+0x2a>
+ 164:	00 97       	sbiw	r24, 0x00	; 0
+ 166:	81 f0       	breq	.+32     	; 0x188 <Tick+0x42>
+ 168:	01 97       	sbiw	r24, 0x01	; 1
+ 16a:	09 f4       	brne	.+2      	; 0x16e <Tick+0x28>
+ 16c:	4e c0       	rjmp	.+156    	; 0x20a <Tick+0xc4>
 			state = Unlocked;
 		}
 		break;
 		
 		default:
 		break;
- 168:	a6 c0       	rjmp	.+332    	; 0x2b6 <Tick+0x170>
+ 16e:	04 c1       	rjmp	.+520    	; 0x378 <Tick+0x232>
 
 }
 
 
 void Tick() {
 	switch (state) { //Transitions
- 16a:	82 30       	cpi	r24, 0x02	; 2
- 16c:	91 05       	cpc	r25, r1
- 16e:	09 f4       	brne	.+2      	; 0x172 <Tick+0x2c>
- 170:	53 c0       	rjmp	.+166    	; 0x218 <Tick+0xd2>
- 172:	03 97       	sbiw	r24, 0x03	; 3
+ 170:	84 30       	cpi	r24, 0x04	; 4
+ 172:	91 05       	cpc	r25, r1
  174:	09 f4       	brne	.+2      	; 0x178 <Tick+0x32>
- 176:	92 c0       	rjmp	.+292    	; 0x29c <Tick+0x156>
+ 176:	a6 c0       	rjmp	.+332    	; 0x2c4 <Tick+0x17e>
+ 178:	84 30       	cpi	r24, 0x04	; 4
+ 17a:	91 05       	cpc	r25, r1
+ 17c:	0c f4       	brge	.+2      	; 0x180 <Tick+0x3a>
+ 17e:	60 c0       	rjmp	.+192    	; 0x240 <Tick+0xfa>
+ 180:	05 97       	sbiw	r24, 0x05	; 5
+ 182:	09 f4       	brne	.+2      	; 0x186 <Tick+0x40>
+ 184:	e3 c0       	rjmp	.+454    	; 0x34c <Tick+0x206>
 			state = Unlocked;
 		}
 		break;
 		
 		default:
 		break;
- 178:	9e c0       	rjmp	.+316    	; 0x2b6 <Tick+0x170>
+ 186:	f8 c0       	rjmp	.+496    	; 0x378 <Tick+0x232>
 
 
 void Tick() {
 	switch (state) { //Transitions
 		case Locked:
 		if (GetBit(A, 2))
- 17a:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 17e:	62 e0       	ldi	r22, 0x02	; 2
- 180:	c4 df       	rcall	.-120    	; 0x10a <GetBit>
- 182:	88 23       	and	r24, r24
- 184:	21 f0       	breq	.+8      	; 0x18e <Tick+0x48>
+ 188:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 18c:	62 e0       	ldi	r22, 0x02	; 2
+ 18e:	bd df       	rcall	.-134    	; 0x10a <GetBit>
+ 190:	88 23       	and	r24, r24
+ 192:	21 f0       	breq	.+8      	; 0x19c <Tick+0x56>
 		{
 			state = PA2_prsd;
- 186:	81 e0       	ldi	r24, 0x01	; 1
- 188:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+ 194:	81 e0       	ldi	r24, 0x01	; 1
+ 196:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
 		}
 		else 
 		{
 			state = Locked;
 		}
 		break;
- 18c:	94 c0       	rjmp	.+296    	; 0x2b6 <Tick+0x170>
+ 19a:	ee c0       	rjmp	.+476    	; 0x378 <Tick+0x232>
 		case Locked:
 		if (GetBit(A, 2))
 		{
 			state = PA2_prsd;
 		}
 		else if((GetBit(A,1)) && (GetBit(A,2)) && (GetBit(A,3)))
- 18e:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 192:	61 e0       	ldi	r22, 0x01	; 1
- 194:	ba df       	rcall	.-140    	; 0x10a <GetBit>
- 196:	88 23       	and	r24, r24
- 198:	79 f0       	breq	.+30     	; 0x1b8 <Tick+0x72>
- 19a:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 19e:	62 e0       	ldi	r22, 0x02	; 2
- 1a0:	b4 df       	rcall	.-152    	; 0x10a <GetBit>
- 1a2:	88 23       	and	r24, r24
- 1a4:	49 f0       	breq	.+18     	; 0x1b8 <Tick+0x72>
- 1a6:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 1aa:	63 e0       	ldi	r22, 0x03	; 3
- 1ac:	ae df       	rcall	.-164    	; 0x10a <GetBit>
- 1ae:	88 23       	and	r24, r24
- 1b0:	19 f0       	breq	.+6      	; 0x1b8 <Tick+0x72>
+ 19c:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 1a0:	61 e0       	ldi	r22, 0x01	; 1
+ 1a2:	b3 df       	rcall	.-154    	; 0x10a <GetBit>
+ 1a4:	88 23       	and	r24, r24
+ 1a6:	79 f0       	breq	.+30     	; 0x1c6 <Tick+0x80>
+ 1a8:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 1ac:	62 e0       	ldi	r22, 0x02	; 2
+ 1ae:	ad df       	rcall	.-166    	; 0x10a <GetBit>
+ 1b0:	88 23       	and	r24, r24
+ 1b2:	49 f0       	breq	.+18     	; 0x1c6 <Tick+0x80>
+ 1b4:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 1b8:	63 e0       	ldi	r22, 0x03	; 3
+ 1ba:	a7 df       	rcall	.-178    	; 0x10a <GetBit>
+ 1bc:	88 23       	and	r24, r24
+ 1be:	19 f0       	breq	.+6      	; 0x1c6 <Tick+0x80>
 		{
 			state = Locked;
- 1b2:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+ 1c0:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
 		}
 		else if ((GetBit(A,1)) && (GetBit(A,2)))
- 1b6:	21 c0       	rjmp	.+66     	; 0x1fa <Tick+0xb4>
- 1b8:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 1bc:	61 e0       	ldi	r22, 0x01	; 1
- 1be:	a5 df       	rcall	.-182    	; 0x10a <GetBit>
- 1c0:	88 23       	and	r24, r24
- 1c2:	49 f0       	breq	.+18     	; 0x1d6 <Tick+0x90>
- 1c4:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 1c8:	62 e0       	ldi	r22, 0x02	; 2
- 1ca:	9f df       	rcall	.-194    	; 0x10a <GetBit>
- 1cc:	88 23       	and	r24, r24
- 1ce:	19 f0       	breq	.+6      	; 0x1d6 <Tick+0x90>
+ 1c4:	21 c0       	rjmp	.+66     	; 0x208 <Tick+0xc2>
+ 1c6:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 1ca:	61 e0       	ldi	r22, 0x01	; 1
+ 1cc:	9e df       	rcall	.-196    	; 0x10a <GetBit>
+ 1ce:	88 23       	and	r24, r24
+ 1d0:	49 f0       	breq	.+18     	; 0x1e4 <Tick+0x9e>
+ 1d2:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 1d6:	62 e0       	ldi	r22, 0x02	; 2
+ 1d8:	98 df       	rcall	.-208    	; 0x10a <GetBit>
+ 1da:	88 23       	and	r24, r24
+ 1dc:	19 f0       	breq	.+6      	; 0x1e4 <Tick+0x9e>
 		{
 			state = Locked;
- 1d0:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+ 1de:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
 		}
 		else if ((GetBit(A,1)) &&  (GetBit(A,3)))
- 1d4:	12 c0       	rjmp	.+36     	; 0x1fa <Tick+0xb4>
- 1d6:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 1da:	61 e0       	ldi	r22, 0x01	; 1
- 1dc:	96 df       	rcall	.-212    	; 0x10a <GetBit>
- 1de:	88 23       	and	r24, r24
- 1e0:	49 f0       	breq	.+18     	; 0x1f4 <Tick+0xae>
- 1e2:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 1e6:	63 e0       	ldi	r22, 0x03	; 3
- 1e8:	90 df       	rcall	.-224    	; 0x10a <GetBit>
- 1ea:	88 23       	and	r24, r24
- 1ec:	19 f0       	breq	.+6      	; 0x1f4 <Tick+0xae>
+ 1e2:	12 c0       	rjmp	.+36     	; 0x208 <Tick+0xc2>
+ 1e4:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 1e8:	61 e0       	ldi	r22, 0x01	; 1
+ 1ea:	8f df       	rcall	.-226    	; 0x10a <GetBit>
+ 1ec:	88 23       	and	r24, r24
+ 1ee:	49 f0       	breq	.+18     	; 0x202 <Tick+0xbc>
+ 1f0:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 1f4:	63 e0       	ldi	r22, 0x03	; 3
+ 1f6:	89 df       	rcall	.-238    	; 0x10a <GetBit>
+ 1f8:	88 23       	and	r24, r24
+ 1fa:	19 f0       	breq	.+6      	; 0x202 <Tick+0xbc>
 		{
 			state = Locked;
- 1ee:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+ 1fc:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
 		}
 		else 
 		{
 			state = Locked;
- 1f2:	03 c0       	rjmp	.+6      	; 0x1fa <Tick+0xb4>
- 1f4:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+ 200:	03 c0       	rjmp	.+6      	; 0x208 <Tick+0xc2>
+ 202:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
 		}
 		break;
- 1f8:	5e c0       	rjmp	.+188    	; 0x2b6 <Tick+0x170>
+ 206:	b8 c0       	rjmp	.+368    	; 0x378 <Tick+0x232>
 		
 		case PA2_prsd:
 		if (GetBit(A, 2))
- 1fa:	5d c0       	rjmp	.+186    	; 0x2b6 <Tick+0x170>
- 1fc:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 200:	62 e0       	ldi	r22, 0x02	; 2
- 202:	83 df       	rcall	.-250    	; 0x10a <GetBit>
- 204:	88 23       	and	r24, r24
- 206:	21 f0       	breq	.+8      	; 0x210 <Tick+0xca>
+ 208:	b7 c0       	rjmp	.+366    	; 0x378 <Tick+0x232>
+ 20a:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 20e:	62 e0       	ldi	r22, 0x02	; 2
+ 210:	7c df       	rcall	.-264    	; 0x10a <GetBit>
+ 212:	88 23       	and	r24, r24
+ 214:	21 f0       	breq	.+8      	; 0x21e <Tick+0xd8>
 		{
 			state = PA2_prsd;
- 208:	81 e0       	ldi	r24, 0x01	; 1
- 20a:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+ 216:	81 e0       	ldi	r24, 0x01	; 1
+ 218:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
 		}
 		
 		else 
 		{
 			state = PA2_rlsd;
- 20e:	53 c0       	rjmp	.+166    	; 0x2b6 <Tick+0x170>
- 210:	82 e0       	ldi	r24, 0x02	; 2
- 212:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+ 21c:	03 c0       	rjmp	.+6      	; 0x224 <Tick+0xde>
+ 21e:	83 e0       	ldi	r24, 0x03	; 3
+ 220:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+		}
+		case PA2_prsd1:
+		if (GetBit(A, 2))
+ 224:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 228:	62 e0       	ldi	r22, 0x02	; 2
+ 22a:	6f df       	rcall	.-290    	; 0x10a <GetBit>
+ 22c:	88 23       	and	r24, r24
+ 22e:	21 f0       	breq	.+8      	; 0x238 <Tick+0xf2>
+		{
+			state = PA2_prsd1;
+ 230:	82 e0       	ldi	r24, 0x02	; 2
+ 232:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+		}
+		else 
+		{
+			state = PA2_rlsd1;
+ 236:	a0 c0       	rjmp	.+320    	; 0x378 <Tick+0x232>
+ 238:	84 e0       	ldi	r24, 0x04	; 4
+ 23a:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
 		}
 		break;
 		
 		case PA2_rlsd:
 		if(GetBit(A, 1))
- 216:	4f c0       	rjmp	.+158    	; 0x2b6 <Tick+0x170>
- 218:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 21c:	61 e0       	ldi	r22, 0x01	; 1
- 21e:	75 df       	rcall	.-278    	; 0x10a <GetBit>
- 220:	88 23       	and	r24, r24
+ 23e:	9c c0       	rjmp	.+312    	; 0x378 <Tick+0x232>
+ 240:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 244:	61 e0       	ldi	r22, 0x01	; 1
+ 246:	61 df       	rcall	.-318    	; 0x10a <GetBit>
+ 248:	88 23       	and	r24, r24
 		{
 			state = Unlocked;
- 222:	21 f0       	breq	.+8      	; 0x22c <Tick+0xe6>
- 224:	83 e0       	ldi	r24, 0x03	; 3
- 226:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
-		}
-		else if ((GetBit(A,1)) && (GetBit(A,2)) && (GetBit(A,3)))
- 22a:	45 c0       	rjmp	.+138    	; 0x2b6 <Tick+0x170>
- 22c:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 230:	61 e0       	ldi	r22, 0x01	; 1
- 232:	6b df       	rcall	.-298    	; 0x10a <GetBit>
- 234:	88 23       	and	r24, r24
- 236:	79 f0       	breq	.+30     	; 0x256 <Tick+0x110>
- 238:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 23c:	62 e0       	ldi	r22, 0x02	; 2
- 23e:	65 df       	rcall	.-310    	; 0x10a <GetBit>
- 240:	88 23       	and	r24, r24
- 242:	49 f0       	breq	.+18     	; 0x256 <Tick+0x110>
- 244:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 248:	63 e0       	ldi	r22, 0x03	; 3
- 24a:	5f df       	rcall	.-322    	; 0x10a <GetBit>
- 24c:	88 23       	and	r24, r24
-		{
-			state = Locked;
- 24e:	19 f0       	breq	.+6      	; 0x256 <Tick+0x110>
- 250:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
-		}
-		else if ((GetBit(A,1)) && (GetBit(A,2)))
- 254:	22 c0       	rjmp	.+68     	; 0x29a <Tick+0x154>
- 256:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 25a:	61 e0       	ldi	r22, 0x01	; 1
- 25c:	56 df       	rcall	.-340    	; 0x10a <GetBit>
- 25e:	88 23       	and	r24, r24
- 260:	49 f0       	breq	.+18     	; 0x274 <Tick+0x12e>
- 262:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 266:	62 e0       	ldi	r22, 0x02	; 2
- 268:	50 df       	rcall	.-352    	; 0x10a <GetBit>
- 26a:	88 23       	and	r24, r24
-		{
-			state = Locked;
- 26c:	19 f0       	breq	.+6      	; 0x274 <Tick+0x12e>
- 26e:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
-		}
-		else if ((GetBit(A,1)) &&  (GetBit(A,3)))
- 272:	13 c0       	rjmp	.+38     	; 0x29a <Tick+0x154>
- 274:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 278:	61 e0       	ldi	r22, 0x01	; 1
- 27a:	47 df       	rcall	.-370    	; 0x10a <GetBit>
- 27c:	88 23       	and	r24, r24
- 27e:	49 f0       	breq	.+18     	; 0x292 <Tick+0x14c>
- 280:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 284:	63 e0       	ldi	r22, 0x03	; 3
- 286:	41 df       	rcall	.-382    	; 0x10a <GetBit>
- 288:	88 23       	and	r24, r24
- 28a:	19 f0       	breq	.+6      	; 0x292 <Tick+0x14c>
-		{
-			state = Locked;
- 28c:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
- 290:	04 c0       	rjmp	.+8      	; 0x29a <Tick+0x154>
+ 24a:	21 f0       	breq	.+8      	; 0x254 <Tick+0x10e>
+ 24c:	85 e0       	ldi	r24, 0x05	; 5
 		}
 		else 
 		{
 			state = PA2_rlsd;
- 292:	82 e0       	ldi	r24, 0x02	; 2
- 294:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
 		}
 		break;
- 298:	0e c0       	rjmp	.+28     	; 0x2b6 <Tick+0x170>
- 29a:	0d c0       	rjmp	.+26     	; 0x2b6 <Tick+0x170>
-		
-		case Unlocked:
-		if(GetBit(A, 7))
+ 24e:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+		case PA2_rlsd:
+		if(GetBit(A, 1))
+		{
+			state = Unlocked;
+		}
+		else if ((GetBit(A,1)) && (GetBit(A,2)) && (GetBit(A,3)))
+ 252:	92 c0       	rjmp	.+292    	; 0x378 <Tick+0x232>
+ 254:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 258:	61 e0       	ldi	r22, 0x01	; 1
+ 25a:	57 df       	rcall	.-338    	; 0x10a <GetBit>
+ 25c:	88 23       	and	r24, r24
+ 25e:	79 f0       	breq	.+30     	; 0x27e <Tick+0x138>
+ 260:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 264:	62 e0       	ldi	r22, 0x02	; 2
+ 266:	51 df       	rcall	.-350    	; 0x10a <GetBit>
+ 268:	88 23       	and	r24, r24
+ 26a:	49 f0       	breq	.+18     	; 0x27e <Tick+0x138>
+ 26c:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 270:	63 e0       	ldi	r22, 0x03	; 3
+ 272:	4b df       	rcall	.-362    	; 0x10a <GetBit>
+		{
+			state = Locked;
+ 274:	88 23       	and	r24, r24
+ 276:	19 f0       	breq	.+6      	; 0x27e <Tick+0x138>
+ 278:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+		}
+		else if ((GetBit(A,1)) && (GetBit(A,2)))
+ 27c:	22 c0       	rjmp	.+68     	; 0x2c2 <Tick+0x17c>
+ 27e:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 282:	61 e0       	ldi	r22, 0x01	; 1
+ 284:	42 df       	rcall	.-380    	; 0x10a <GetBit>
+ 286:	88 23       	and	r24, r24
+ 288:	49 f0       	breq	.+18     	; 0x29c <Tick+0x156>
+ 28a:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 28e:	62 e0       	ldi	r22, 0x02	; 2
+ 290:	3c df       	rcall	.-392    	; 0x10a <GetBit>
+		{
+			state = Locked;
+ 292:	88 23       	and	r24, r24
+ 294:	19 f0       	breq	.+6      	; 0x29c <Tick+0x156>
+ 296:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+		}
+		else if ((GetBit(A,1)) &&  (GetBit(A,3)))
+ 29a:	13 c0       	rjmp	.+38     	; 0x2c2 <Tick+0x17c>
  29c:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
- 2a0:	67 e0       	ldi	r22, 0x07	; 7
+ 2a0:	61 e0       	ldi	r22, 0x01	; 1
  2a2:	33 df       	rcall	.-410    	; 0x10a <GetBit>
  2a4:	88 23       	and	r24, r24
- 2a6:	19 f0       	breq	.+6      	; 0x2ae <Tick+0x168>
- 2a8:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+ 2a6:	49 f0       	breq	.+18     	; 0x2ba <Tick+0x174>
+ 2a8:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 2ac:	63 e0       	ldi	r22, 0x03	; 3
+ 2ae:	2d df       	rcall	.-422    	; 0x10a <GetBit>
+ 2b0:	88 23       	and	r24, r24
 		{
 			state = Locked;
- 2ac:	03 c0       	rjmp	.+6      	; 0x2b4 <Tick+0x16e>
+ 2b2:	19 f0       	breq	.+6      	; 0x2ba <Tick+0x174>
+ 2b4:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+		}
+		else 
+		{
+			state = PA2_rlsd;
+ 2b8:	04 c0       	rjmp	.+8      	; 0x2c2 <Tick+0x17c>
+ 2ba:	83 e0       	ldi	r24, 0x03	; 3
+		}
+		break;
+ 2bc:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+		
+		case PA2_rlsd1:
+		if(GetBit(A, 1))
+ 2c0:	5b c0       	rjmp	.+182    	; 0x378 <Tick+0x232>
+ 2c2:	5a c0       	rjmp	.+180    	; 0x378 <Tick+0x232>
+ 2c4:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 2c8:	61 e0       	ldi	r22, 0x01	; 1
+ 2ca:	1f df       	rcall	.-450    	; 0x10a <GetBit>
+		{
+			state = Locked;
+ 2cc:	88 23       	and	r24, r24
+ 2ce:	19 f0       	breq	.+6      	; 0x2d6 <Tick+0x190>
+		}
+		else 
+		{
+			state = PA2_rlsd1;
+		}
+		break;
+ 2d0:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+		case PA2_rlsd1:
+		if(GetBit(A, 1))
+		{
+			state = Locked;
+		}
+		else if ((GetBit(A,1)) && (GetBit(A,2)) && (GetBit(A,3)))
+ 2d4:	51 c0       	rjmp	.+162    	; 0x378 <Tick+0x232>
+ 2d6:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 2da:	61 e0       	ldi	r22, 0x01	; 1
+ 2dc:	16 df       	rcall	.-468    	; 0x10a <GetBit>
+ 2de:	88 23       	and	r24, r24
+ 2e0:	81 f0       	breq	.+32     	; 0x302 <Tick+0x1bc>
+ 2e2:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 2e6:	62 e0       	ldi	r22, 0x02	; 2
+ 2e8:	10 df       	rcall	.-480    	; 0x10a <GetBit>
+ 2ea:	88 23       	and	r24, r24
+ 2ec:	51 f0       	breq	.+20     	; 0x302 <Tick+0x1bc>
+ 2ee:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 2f2:	63 e0       	ldi	r22, 0x03	; 3
+ 2f4:	0a df       	rcall	.-492    	; 0x10a <GetBit>
+ 2f6:	88 23       	and	r24, r24
+		{
+			state = Unlocked;
+ 2f8:	21 f0       	breq	.+8      	; 0x302 <Tick+0x1bc>
+ 2fa:	85 e0       	ldi	r24, 0x05	; 5
+ 2fc:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+		}
+		else if ((GetBit(A,1)) && (GetBit(A,2)))
+ 300:	24 c0       	rjmp	.+72     	; 0x34a <Tick+0x204>
+ 302:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 306:	61 e0       	ldi	r22, 0x01	; 1
+ 308:	00 df       	rcall	.-512    	; 0x10a <GetBit>
+ 30a:	88 23       	and	r24, r24
+ 30c:	51 f0       	breq	.+20     	; 0x322 <Tick+0x1dc>
+ 30e:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 312:	62 e0       	ldi	r22, 0x02	; 2
+ 314:	fa de       	rcall	.-524    	; 0x10a <GetBit>
+ 316:	88 23       	and	r24, r24
+		{
+			state = Unlocked;
+ 318:	21 f0       	breq	.+8      	; 0x322 <Tick+0x1dc>
+ 31a:	85 e0       	ldi	r24, 0x05	; 5
+ 31c:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+		}
+		else if ((GetBit(A,1)) &&  (GetBit(A,3)))
+ 320:	14 c0       	rjmp	.+40     	; 0x34a <Tick+0x204>
+ 322:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 326:	61 e0       	ldi	r22, 0x01	; 1
+ 328:	f0 de       	rcall	.-544    	; 0x10a <GetBit>
+ 32a:	88 23       	and	r24, r24
+ 32c:	51 f0       	breq	.+20     	; 0x342 <Tick+0x1fc>
+ 32e:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 332:	63 e0       	ldi	r22, 0x03	; 3
+ 334:	ea de       	rcall	.-556    	; 0x10a <GetBit>
+ 336:	88 23       	and	r24, r24
+		{
+			state = Unlocked;
+ 338:	21 f0       	breq	.+8      	; 0x342 <Tick+0x1fc>
+ 33a:	85 e0       	ldi	r24, 0x05	; 5
+ 33c:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+		}
+		else 
+		{
+			state = PA2_rlsd1;
+ 340:	04 c0       	rjmp	.+8      	; 0x34a <Tick+0x204>
+ 342:	84 e0       	ldi	r24, 0x04	; 4
+ 344:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+		}
+		break;
+ 348:	17 c0       	rjmp	.+46     	; 0x378 <Tick+0x232>
+		case Unlocked:
+		if(GetBit(A, 7))
+ 34a:	16 c0       	rjmp	.+44     	; 0x378 <Tick+0x232>
+ 34c:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 350:	67 e0       	ldi	r22, 0x07	; 7
+ 352:	db de       	rcall	.-586    	; 0x10a <GetBit>
+ 354:	88 23       	and	r24, r24
+ 356:	11 f0       	breq	.+4      	; 0x35c <Tick+0x216>
+		{
+			state = Locked;
+ 358:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+		}
+		if(GetBit(A,2))
+ 35c:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <A>
+ 360:	62 e0       	ldi	r22, 0x02	; 2
+ 362:	d3 de       	rcall	.-602    	; 0x10a <GetBit>
+ 364:	88 23       	and	r24, r24
+ 366:	21 f0       	breq	.+8      	; 0x370 <Tick+0x22a>
+ 368:	82 e0       	ldi	r24, 0x02	; 2
+		{
+			state = PA2_prsd1;
+ 36a:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
+ 36e:	03 c0       	rjmp	.+6      	; 0x376 <Tick+0x230>
 		}
 		else
 		{
 			state = Unlocked;
 		}
 		break;
- 2ae:	83 e0       	ldi	r24, 0x03	; 3
+ 370:	85 e0       	ldi	r24, 0x05	; 5
 		{
-			state = Locked;
+			state = PA2_prsd1;
 		}
 		else
 		{
 			state = Unlocked;
- 2b0:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
- 2b4:	00 00       	nop
+ 372:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <state>
 		}
 		break;
- 2b6:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <state>
+ 376:	00 00       	nop
 		
 		default:
 		break;
 	}
 	switch (state) { //State Actions
- 2ba:	88 2f       	mov	r24, r24
- 2bc:	90 e0       	ldi	r25, 0x00	; 0
- 2be:	81 30       	cpi	r24, 0x01	; 1
- 2c0:	91 05       	cpc	r25, r1
- 2c2:	19 f1       	breq	.+70     	; 0x30a <Tick+0x1c4>
- 2c4:	82 30       	cpi	r24, 0x02	; 2
- 2c6:	91 05       	cpc	r25, r1
- 2c8:	1c f4       	brge	.+6      	; 0x2d0 <Tick+0x18a>
- 2ca:	89 2b       	or	r24, r25
- 2cc:	41 f0       	breq	.+16     	; 0x2de <Tick+0x198>
+ 378:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <state>
+ 37c:	88 2f       	mov	r24, r24
+ 37e:	90 e0       	ldi	r25, 0x00	; 0
+ 380:	81 30       	cpi	r24, 0x01	; 1
+ 382:	91 05       	cpc	r25, r1
+ 384:	19 f1       	breq	.+70     	; 0x3cc <Tick+0x286>
+ 386:	82 30       	cpi	r24, 0x02	; 2
+ 388:	91 05       	cpc	r25, r1
+ 38a:	1c f4       	brge	.+6      	; 0x392 <Tick+0x24c>
 		tmpB = SetBit(tmpB, 0, 1);
 		tmpC = SetBit(tmpC, 0, 1);
 		tmpC = SetBit(tmpC, 1, 1);
 		break;
 		default:
 		break;
- 2ce:	5f c0       	rjmp	.+190    	; 0x38e <Tick+0x248>
+ 38c:	89 2b       	or	r24, r25
 		break;
 		
 		default:
 		break;
 	}
 	switch (state) { //State Actions
- 2d0:	82 30       	cpi	r24, 0x02	; 2
- 2d2:	91 05       	cpc	r25, r1
- 2d4:	81 f1       	breq	.+96     	; 0x336 <Tick+0x1f0>
- 2d6:	03 97       	sbiw	r24, 0x03	; 3
- 2d8:	09 f4       	brne	.+2      	; 0x2dc <Tick+0x196>
+ 38e:	41 f0       	breq	.+16     	; 0x3a0 <Tick+0x25a>
+ 390:	5f c0       	rjmp	.+190    	; 0x450 <__LOCK_REGION_LENGTH__+0x50>
+ 392:	83 30       	cpi	r24, 0x03	; 3
+ 394:	91 05       	cpc	r25, r1
+ 396:	81 f1       	breq	.+96     	; 0x3f8 <Tick+0x2b2>
 		tmpB = SetBit(tmpB, 0, 1);
 		tmpC = SetBit(tmpC, 0, 1);
 		tmpC = SetBit(tmpC, 1, 1);
 		break;
 		default:
 		break;
- 2da:	43 c0       	rjmp	.+134    	; 0x362 <Tick+0x21c>
+ 398:	05 97       	sbiw	r24, 0x05	; 5
 		default:
 		break;
 	}
 	switch (state) { //State Actions
 		case Locked: // initial state, Locked
 		tmpB = SetBit(tmpB, 0, 0);
- 2dc:	58 c0       	rjmp	.+176    	; 0x38e <Tick+0x248>
- 2de:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
- 2e2:	40 e0       	ldi	r20, 0x00	; 0
- 2e4:	60 e0       	ldi	r22, 0x00	; 0
- 2e6:	e3 de       	rcall	.-570    	; 0xae <SetBit>
- 2e8:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 39a:	09 f4       	brne	.+2      	; 0x39e <Tick+0x258>
+ 39c:	43 c0       	rjmp	.+134    	; 0x424 <__LOCK_REGION_LENGTH__+0x24>
+ 39e:	58 c0       	rjmp	.+176    	; 0x450 <__LOCK_REGION_LENGTH__+0x50>
+ 3a0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+ 3a4:	40 e0       	ldi	r20, 0x00	; 0
+ 3a6:	60 e0       	ldi	r22, 0x00	; 0
 		tmpC = SetBit(tmpC, 0, 0);
- 2ec:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
- 2f0:	40 e0       	ldi	r20, 0x00	; 0
- 2f2:	60 e0       	ldi	r22, 0x00	; 0
- 2f4:	dc de       	rcall	.-584    	; 0xae <SetBit>
- 2f6:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3a8:	82 de       	rcall	.-764    	; 0xae <SetBit>
+ 3aa:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 3ae:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 3b2:	40 e0       	ldi	r20, 0x00	; 0
+ 3b4:	60 e0       	ldi	r22, 0x00	; 0
 		tmpC = SetBit(tmpC, 1, 0);
- 2fa:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
- 2fe:	40 e0       	ldi	r20, 0x00	; 0
- 300:	61 e0       	ldi	r22, 0x01	; 1
- 302:	d5 de       	rcall	.-598    	; 0xae <SetBit>
- 304:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3b6:	7b de       	rcall	.-778    	; 0xae <SetBit>
+ 3b8:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3bc:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 3c0:	40 e0       	ldi	r20, 0x00	; 0
+ 3c2:	61 e0       	ldi	r22, 0x01	; 1
 		break;
+ 3c4:	74 de       	rcall	.-792    	; 0xae <SetBit>
 		case PA2_prsd: // Pressing #
 		tmpB = SetBit(tmpB, 0, 0);
- 308:	42 c0       	rjmp	.+132    	; 0x38e <Tick+0x248>
- 30a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
- 30e:	40 e0       	ldi	r20, 0x00	; 0
- 310:	60 e0       	ldi	r22, 0x00	; 0
- 312:	cd de       	rcall	.-614    	; 0xae <SetBit>
- 314:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 3c6:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3ca:	42 c0       	rjmp	.+132    	; 0x450 <__LOCK_REGION_LENGTH__+0x50>
+ 3cc:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+ 3d0:	40 e0       	ldi	r20, 0x00	; 0
+ 3d2:	60 e0       	ldi	r22, 0x00	; 0
 		tmpC = SetBit(tmpC, 0, 1);
- 318:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
- 31c:	41 e0       	ldi	r20, 0x01	; 1
- 31e:	60 e0       	ldi	r22, 0x00	; 0
- 320:	c6 de       	rcall	.-628    	; 0xae <SetBit>
- 322:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3d4:	6c de       	rcall	.-808    	; 0xae <SetBit>
+ 3d6:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 3da:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 3de:	41 e0       	ldi	r20, 0x01	; 1
+ 3e0:	60 e0       	ldi	r22, 0x00	; 0
 		tmpC = SetBit(tmpC, 1, 0);
- 326:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
- 32a:	40 e0       	ldi	r20, 0x00	; 0
- 32c:	61 e0       	ldi	r22, 0x01	; 1
- 32e:	bf de       	rcall	.-642    	; 0xae <SetBit>
- 330:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3e2:	65 de       	rcall	.-822    	; 0xae <SetBit>
+ 3e4:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3e8:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 3ec:	40 e0       	ldi	r20, 0x00	; 0
+ 3ee:	61 e0       	ldi	r22, 0x01	; 1
 		
 		break;
 		case PA2_rlsd: // # released
 		tmpB = SetBit(tmpB, 0, 0);
- 334:	2c c0       	rjmp	.+88     	; 0x38e <Tick+0x248>
- 336:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
- 33a:	40 e0       	ldi	r20, 0x00	; 0
- 33c:	60 e0       	ldi	r22, 0x00	; 0
- 33e:	b7 de       	rcall	.-658    	; 0xae <SetBit>
- 340:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 3f0:	5e de       	rcall	.-836    	; 0xae <SetBit>
+ 3f2:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3f6:	2c c0       	rjmp	.+88     	; 0x450 <__LOCK_REGION_LENGTH__+0x50>
+ 3f8:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+ 3fc:	40 e0       	ldi	r20, 0x00	; 0
 		tmpC = SetBit(tmpC, 0, 0);
- 344:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
- 348:	40 e0       	ldi	r20, 0x00	; 0
- 34a:	60 e0       	ldi	r22, 0x00	; 0
- 34c:	b0 de       	rcall	.-672    	; 0xae <SetBit>
- 34e:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 3fe:	60 e0       	ldi	r22, 0x00	; 0
+ 400:	56 de       	rcall	.-852    	; 0xae <SetBit>
+ 402:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 406:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 40a:	40 e0       	ldi	r20, 0x00	; 0
+ 40c:	60 e0       	ldi	r22, 0x00	; 0
 		tmpC = SetBit(tmpC, 1, 1);
- 352:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
- 356:	41 e0       	ldi	r20, 0x01	; 1
- 358:	61 e0       	ldi	r22, 0x01	; 1
- 35a:	a9 de       	rcall	.-686    	; 0xae <SetBit>
- 35c:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 40e:	4f de       	rcall	.-866    	; 0xae <SetBit>
+ 410:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 414:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 418:	41 e0       	ldi	r20, 0x01	; 1
+ 41a:	61 e0       	ldi	r22, 0x01	; 1
+ 41c:	48 de       	rcall	.-880    	; 0xae <SetBit>
 		break;
+ 41e:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
 		case Unlocked: // Unlocked PB0 = 0x01
 		tmpB = SetBit(tmpB, 0, 1);
- 360:	16 c0       	rjmp	.+44     	; 0x38e <Tick+0x248>
- 362:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
- 366:	41 e0       	ldi	r20, 0x01	; 1
- 368:	60 e0       	ldi	r22, 0x00	; 0
- 36a:	a1 de       	rcall	.-702    	; 0xae <SetBit>
- 36c:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 422:	16 c0       	rjmp	.+44     	; 0x450 <__LOCK_REGION_LENGTH__+0x50>
+ 424:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+ 428:	41 e0       	ldi	r20, 0x01	; 1
+ 42a:	60 e0       	ldi	r22, 0x00	; 0
+ 42c:	40 de       	rcall	.-896    	; 0xae <SetBit>
+ 42e:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
 		tmpC = SetBit(tmpC, 0, 1);
- 370:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
- 374:	41 e0       	ldi	r20, 0x01	; 1
- 376:	60 e0       	ldi	r22, 0x00	; 0
- 378:	9a de       	rcall	.-716    	; 0xae <SetBit>
- 37a:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
- 37e:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 432:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 436:	41 e0       	ldi	r20, 0x01	; 1
+ 438:	60 e0       	ldi	r22, 0x00	; 0
+ 43a:	39 de       	rcall	.-910    	; 0xae <SetBit>
+ 43c:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
 		tmpC = SetBit(tmpC, 1, 1);
- 382:	41 e0       	ldi	r20, 0x01	; 1
- 384:	61 e0       	ldi	r22, 0x01	; 1
- 386:	93 de       	rcall	.-730    	; 0xae <SetBit>
- 388:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
- 38c:	00 00       	nop
- 38e:	00 00       	nop
+ 440:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <tmpC>
+ 444:	41 e0       	ldi	r20, 0x01	; 1
+ 446:	61 e0       	ldi	r22, 0x01	; 1
+ 448:	32 de       	rcall	.-924    	; 0xae <SetBit>
+ 44a:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <tmpC>
+ 44e:	00 00       	nop
 		break;
- 390:	df 91       	pop	r29
+ 450:	00 00       	nop
 		default:
 		break;
 	}
 }
- 392:	cf 91       	pop	r28
- 394:	08 95       	ret
+ 452:	df 91       	pop	r29
+ 454:	cf 91       	pop	r28
+ 456:	08 95       	ret
 
-00000396 <main>:
- 396:	cf 93       	push	r28
- 398:	df 93       	push	r29
+00000458 <main>:
+ 458:	cf 93       	push	r28
 
 int main()
 {
- 39a:	cd b7       	in	r28, 0x3d	; 61
- 39c:	de b7       	in	r29, 0x3e	; 62
+ 45a:	df 93       	push	r29
+ 45c:	cd b7       	in	r28, 0x3d	; 61
+ 45e:	de b7       	in	r29, 0x3e	; 62
 	state = Locked; // initial state, Locked
- 39e:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
+ 460:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <state>
 	DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as input
- 3a2:	81 e2       	ldi	r24, 0x21	; 33
- 3a4:	90 e0       	ldi	r25, 0x00	; 0
- 3a6:	fc 01       	movw	r30, r24
- 3a8:	10 82       	st	Z, r1
- 3aa:	82 e2       	ldi	r24, 0x22	; 34
- 3ac:	90 e0       	ldi	r25, 0x00	; 0
- 3ae:	2f ef       	ldi	r18, 0xFF	; 255
- 3b0:	fc 01       	movw	r30, r24
- 3b2:	20 83       	st	Z, r18
+ 464:	81 e2       	ldi	r24, 0x21	; 33
+ 466:	90 e0       	ldi	r25, 0x00	; 0
+ 468:	fc 01       	movw	r30, r24
+ 46a:	10 82       	st	Z, r1
+ 46c:	82 e2       	ldi	r24, 0x22	; 34
+ 46e:	90 e0       	ldi	r25, 0x00	; 0
+ 470:	2f ef       	ldi	r18, 0xFF	; 255
+ 472:	fc 01       	movw	r30, r24
+ 474:	20 83       	st	Z, r18
 	DDRB = 0xFF; PORTB = 0x00; // Configure port B's 8 pins as outputs
- 3b4:	84 e2       	ldi	r24, 0x24	; 36
- 3b6:	90 e0       	ldi	r25, 0x00	; 0
- 3b8:	2f ef       	ldi	r18, 0xFF	; 255
- 3ba:	fc 01       	movw	r30, r24
- 3bc:	20 83       	st	Z, r18
- 3be:	85 e2       	ldi	r24, 0x25	; 37
- 3c0:	90 e0       	ldi	r25, 0x00	; 0
- 3c2:	fc 01       	movw	r30, r24
- 3c4:	10 82       	st	Z, r1
+ 476:	84 e2       	ldi	r24, 0x24	; 36
+ 478:	90 e0       	ldi	r25, 0x00	; 0
+ 47a:	2f ef       	ldi	r18, 0xFF	; 255
+ 47c:	fc 01       	movw	r30, r24
+ 47e:	20 83       	st	Z, r18
+ 480:	85 e2       	ldi	r24, 0x25	; 37
+ 482:	90 e0       	ldi	r25, 0x00	; 0
+ 484:	fc 01       	movw	r30, r24
+ 486:	10 82       	st	Z, r1
 	DDRC = 0xFF; PORTC = 0x00;
- 3c6:	87 e2       	ldi	r24, 0x27	; 39
- 3c8:	90 e0       	ldi	r25, 0x00	; 0
- 3ca:	2f ef       	ldi	r18, 0xFF	; 255
- 3cc:	fc 01       	movw	r30, r24
- 3ce:	20 83       	st	Z, r18
- 3d0:	88 e2       	ldi	r24, 0x28	; 40
- 3d2:	90 e0       	ldi	r25, 0x00	; 0
- 3d4:	fc 01       	movw	r30, r24
- 3d6:	10 82       	st	Z, r1
+ 488:	87 e2       	ldi	r24, 0x27	; 39
+ 48a:	90 e0       	ldi	r25, 0x00	; 0
+ 48c:	2f ef       	ldi	r18, 0xFF	; 255
+ 48e:	fc 01       	movw	r30, r24
+ 490:	20 83       	st	Z, r18
+ 492:	88 e2       	ldi	r24, 0x28	; 40
+ 494:	90 e0       	ldi	r25, 0x00	; 0
+ 496:	fc 01       	movw	r30, r24
+ 498:	10 82       	st	Z, r1
 
 	while(1)
 	{	A = PINA;
- 3d8:	80 e2       	ldi	r24, 0x20	; 32
- 3da:	90 e0       	ldi	r25, 0x00	; 0
- 3dc:	fc 01       	movw	r30, r24
- 3de:	80 81       	ld	r24, Z
- 3e0:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <A>
+ 49a:	80 e2       	ldi	r24, 0x20	; 32
+ 49c:	90 e0       	ldi	r25, 0x00	; 0
+ 49e:	fc 01       	movw	r30, r24
+ 4a0:	80 81       	ld	r24, Z
+ 4a2:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <A>
 		Tick();
- 3e4:	b0 de       	rcall	.-672    	; 0x146 <Tick>
+ 4a6:	4f de       	rcall	.-866    	; 0x146 <Tick>
 		// 3) write results to port
 		PORTB = tmpB;
- 3e6:	85 e2       	ldi	r24, 0x25	; 37
- 3e8:	90 e0       	ldi	r25, 0x00	; 0
- 3ea:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <_edata>
- 3ee:	fc 01       	movw	r30, r24
- 3f0:	20 83       	st	Z, r18
+ 4a8:	85 e2       	ldi	r24, 0x25	; 37
+ 4aa:	90 e0       	ldi	r25, 0x00	; 0
+ 4ac:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <_edata>
+ 4b0:	fc 01       	movw	r30, r24
+ 4b2:	20 83       	st	Z, r18
 		PORTC = tmpC;
- 3f2:	88 e2       	ldi	r24, 0x28	; 40
- 3f4:	90 e0       	ldi	r25, 0x00	; 0
- 3f6:	20 91 01 01 	lds	r18, 0x0101	; 0x800101 <tmpC>
- 3fa:	fc 01       	movw	r30, r24
- 3fc:	20 83       	st	Z, r18
+ 4b4:	88 e2       	ldi	r24, 0x28	; 40
+ 4b6:	90 e0       	ldi	r25, 0x00	; 0
+ 4b8:	20 91 01 01 	lds	r18, 0x0101	; 0x800101 <tmpC>
+ 4bc:	fc 01       	movw	r30, r24
+ 4be:	20 83       	st	Z, r18
 	}
- 3fe:	ec cf       	rjmp	.-40     	; 0x3d8 <main+0x42>
+ 4c0:	ec cf       	rjmp	.-40     	; 0x49a <main+0x42>
 
-00000400 <_exit>:
- 400:	f8 94       	cli
+000004c2 <_exit>:
+ 4c2:	f8 94       	cli
 
-00000402 <__stop_program>:
- 402:	ff cf       	rjmp	.-2      	; 0x402 <__stop_program>
+000004c4 <__stop_program>:
+ 4c4:	ff cf       	rjmp	.-2      	; 0x4c4 <__stop_program>
